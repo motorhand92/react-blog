@@ -1,0 +1,302 @@
+body {
+  margin: 0 0 60px 0;
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  height: 100%;
+}
+
+/* header{
+  background-image:url("https://img.freepik.com/free-vector/abstract-banner-with-low-poly-plexus-design_1048-13883.jpg?t=st=1730364544~exp=1730368144~hmac=0a91253d561f5c648cd018ae1da4e16c3fdede73ab080e3f37db80640a66d5c0&w=1480");
+  background-size:cover;
+  height:900px;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center
+}
+ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.navbar-wrap {
+  position: sticky;
+  top: 0;
+  background-color: #76abae;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+div nav ul {
+  display: flex;
+  list-style-type: none;
+  box-sizing: border-box;
+  padding-top: 0px;
+  margin: 0;
+}
+
+div nav ul li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+  transition: 0.3s;
+}
+
+div nav ul li:hover {
+  background-color: white;
+  color: #31363f;
+  scale: 1.2;
+  border-radius: 10px;
+}
+
+button {
+  background-color: #222831;
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: white;
+  color: #31363f;
+  scale: 1.2;
+}
+
+.content-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-width: 500px;
+  margin: auto;
+  padding: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+}
+
+.article-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+}
+
+.article-content-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-width: 300px;
+  margin: auto;
+  padding: 10px;
+}
+
+img {
+  display: block;
+  margin: auto;
+  max-width: 85%;
+}
+
+.bio-wrap {
+  max-width: 530px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.article-wrap {
+  margin: 20px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  height: 100%;
+}
+
+.comment-like {
+  display: flex;
+}
+
+.comment-like-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-container {
+  display: flex;
+  justify-content: start;
+  height: 40px;
+  width: 100%;
+  margin: 10px 0 20px 0;
+}
+
+h5 {
+  font-weight: normal;
+  margin-right: 5px;
+}
+
+.article-image {
+  transition: 0.3s;
+}
+
+.article-image:hover {
+  filter: blur(1px);
+  scale: 1.05;
+}
+
+.article-header {
+  transition: 0.3s;
+}
+
+.article-header:hover {
+  filter: blur(1px);
+  scale: 1.05;
+}
+
+.article-sum {
+  display: flex;
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  transition: 0.3s;
+}
+
+.article-sum:hover {
+  filter: blur(2px);
+}
+
+.article-sum-text {
+  display: block;
+  width: 75%;
+  margin: 16px;
+}
+
+.article-sum-img {
+  width: 25%;
+  height: auto;
+  margin: 16px;
+  transition: 0.3s;
+}
+
+.article-sum-img:hover {
+  filter: blur(2px);
+}
+
+.icons {
+  width: 30px;
+  height: 30px;
+  margin: auto 5px;
+  filter: saturate(0);
+  transition: 0.3s;
+}
+
+.icons:hover {
+  filter: saturate(100%);
+  scale: 1.2;
+}
+
+.icons-clicked {
+  filter: saturate(100%);
+  scale: 1.2;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #31363f;
+  color: white;
+  height: 50px;
+}
+
+footer div {
+  display: flex;
+}
+
+footer div img {
+  height: 60%;
+  margin: 10px;
+  transition: 0.3s;
+}
+
+footer div img:hover {
+  filter: blur(2px);
+}
+
+footer div h5 {
+  margin: auto;
+  margin-left: 16px;
+}
+
+.comments {
+  display: flex;
+  justify-content: start;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  padding: 5px 0;
+}
+
+.comment {
+  display: flex;
+  margin-right: 50px;
+}
+
+.comment-text {
+  font-weight: normal;
+  position: relative;
+  left: 0;
+}
+
+.comment-container {
+  display: flex;
+  justify-content: start;
+  height: 40px;
+  width: 100%;
+  margin: 10px 0 20px 0;
+}
+
+.account-wrap {
+  display: block;
+  text-align: left;
+  width: 75%;
+}
+
+.account-content {
+  width: 100%;
+  margin-bottom: 50px;
+  display: block;
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  padding: 30px;
+}
+
+.account-input {
+  width: 97%;
+  height: 200px;
+  padding: 16px;
+  resize: none;
+}
+
+.account-title {
+  width: 97%;
+  padding: 16px;
+  font-weight: bold;
+}
+
+.account-button {
+  position: relative;
+  left: 25%;
+  height: 50px;
+  width: 50%;
+  margin: 16px 0 0 0;
+}
