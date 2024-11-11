@@ -16,12 +16,12 @@ function Comments(props) {
   const commentsLength = article.comments.length;
   const articleIndex = contents.findIndex((a) => a.id === props.articleId);
 
-  for (let i = 0; i < commentsLength; i++) {
-    const commentUser = users.find((user) => user.userId === article.comments[i].user);
-    console.log(commentUser);
-    const avatar = commentUser.userAvatar;
-    // dispatch(updateContentAvatar([articleIndex, i, avatar])); // burası için bir get request veya post request çalıştırmak gerekebilir.
-  }
+  // for (let i = 0; i < commentsLength; i++) {
+  //   const commentUser = users.find((user) => user.userId === article.comments[i].user);
+  //   console.log(commentUser);
+  //   const avatar = commentUser.userAvatar;
+  //   // dispatch(updateContentAvatar([articleIndex, i, avatar])); // burası için bir get request veya post request çalıştırmak gerekebilir.
+  // }
 
   const user = users.find((user) => user.userId === userId);
 
