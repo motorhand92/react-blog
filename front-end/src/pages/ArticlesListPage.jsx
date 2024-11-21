@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function ArticlesListPage() {
-  const content = useSelector((state) => state.content.contents);
+  const [content, updateContents] = useState([]);
+
+  useEffect(() => {
+    const loadContent = async () => {
+      const response = await axios.get("/api/articles");
+      const articleInfo = response.data;
+      updateContents(articleInfo);
+    };
+    loadContent();
+  }, []);
 
   return (
     <div>

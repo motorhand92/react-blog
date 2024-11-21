@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const response = await axios.get("/api/bio");
+const bioInfo = response.data;
 
 const bioSlice = createSlice({
   name: "bio",
-  initialState: {
-    bioText: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tempor turpis vitae mauris bibendum dictum.
-    Maecenas sapien ex, blandit fringilla commodo non, consectetur sed orci. Vivamus lacinia nec urna ut
-    convallis. Pellentesque imperdiet vitae justo non imperdiet. Duis in porta massa. Nulla egestas mi tortor, in
-    consequat sem fermentum ac. In quis porta dolor. Etiam efficitur id lectus nec mollis. Nulla facilisi. Quisque
-    molestie diam leo, nec elementum sem lobortis sit amet. Suspendisse ac libero tortor. Aenean dignissim sapien
-    in enim tincidunt gravida. Maecenas non justo nisi.`,
-  },
+  initialState: bioInfo,
   reducers: {
-    updateBio: (state, action) => {
-      state.bioText = action.payload;
+    updateBio: async (state, action) => {
+      await axios.post("/api/bio/bioSum", { bioSum: action.payload }).then((response) => {
+        console.log(response);
+        // state.bio.bioSum = response.data.bioSum;
+      });
+      // console.log(response);
+      // console.log(response);
     },
   },
 });
