@@ -2,6 +2,7 @@ import express from "express";
 import { MongoClient } from "mongodb";
 import { fileURLToPath } from "url";
 import path from "path";
+import "dotenv/config";
 // import { tempContent } from "./temp-content.js";
 // import { tempUser } from "./temp-user.js";
 // import { tempBio } from "./temp-bio.js";
@@ -10,7 +11,7 @@ async function start() {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
 
-  const url = `mongodb+srv://guest:guestuser123@cluster0.jom8i.mongodb.net/`;
+  const url = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.jom8i.mongodb.net/`;
   const client = new MongoClient(url);
 
   await client.connect();
