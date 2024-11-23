@@ -24,9 +24,7 @@ function Article() {
         <div className="article-content">
           <h1>{article.name}</h1>
           <img src={article.imageURL} alt="articleimg" />
-          {article.content.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          {article.content.map((paragraph) => paragraph && <p key={paragraph}>{paragraph}</p>)}
         </div>
       </>
     );

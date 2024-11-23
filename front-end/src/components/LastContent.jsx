@@ -16,14 +16,17 @@ function LastContent() {
   }, []);
 
   if (contents.length > 0) {
-    const article = contents[0];
+    const articleIndex = contents.length - 1;
+    const article = contents[articleIndex];
     const articleId = article.id;
     const articleText = article.content[0].substring(0, 150);
 
     return (
       <Link to={`/articles/${articleId}`} style={{ textDecoration: "none", color: "inherit", height: "100%" }}>
         <div className="article-wrap">
-          <h3>Last Article</h3>
+          <h3>
+            Last Article : <em>{article.name}</em>{" "}
+          </h3>
           <img className="article-image" src={article.imageURL} alt="" />
           <p>{articleText}...</p>
           <CommentLike articleId={articleId} />

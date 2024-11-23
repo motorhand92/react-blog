@@ -18,7 +18,7 @@ function ArticlesListPage() {
     <div>
       <h1>Articles</h1>
       <div>
-        {content.map((article) => (
+        {content.toReversed().map((article) => (
           <Link key={article.id} to={`/articles/${article.id}`} style={{ textDecoration: "none", color: "inherit" }}>
             <div className="article-sum">
               <img src={article.imageURL} alt="sumimg" className="article-sum-img" />

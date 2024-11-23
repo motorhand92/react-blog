@@ -1,82 +1,138 @@
 import express from "express";
-import { tempContent } from "./temp-content.js";
-import { tempUser } from "./temp-user.js";
-import { tempBio } from "./temp-bio.js";
+import { MongoClient } from "mongodb";
+import { fileURLToPath } from "url";
+import path from "path";
+// import { tempContent } from "./temp-content.js";
+// import { tempUser } from "./temp-user.js";
+// import { tempBio } from "./temp-bio.js";
 
-const app = express();
-app.use(express.json());
+async function start() {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
 
-app.get("/api/articles", (req, res) => {
-  res.send(tempContent);
-});
+  const url = `mongodb+srv://guest:guestuser123@cluster0.jom8i.mongodb.net/`;
+  const client = new MongoClient(url);
 
-app.put("/api/articles/:articleId/like", (req, res) => {
-  const articleId = req.params.articleId;
-  const article = tempContent.find((article) => article.id === articleId);
-  article.like = article.like + 1;
-  res.send(tempContent);
-});
+  await client.connect();
+  const db = client.db("fsb");
 
-app.put("/api/articles/:articleId/unlike", (req, res) => {
-  const articleId = req.params.articleId;
-  const article = tempContent.find((article) => article.id === articleId);
-  article.like = article.like - 1;
-  res.send(tempContent);
-});
+  const app = express();
+  app.use(express.json());
+  app.use(express.static(path.join(__dirname, "../build")));
 
-app.get("/api/users", (req, res) => {
-  res.send(tempUser);
-});
+  app.get("/^(?!/api).+/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../build/index.html"));
+  });
 
-app.put("/api/users/:userId/avatar", (req, res) => {
-  const userId = req.params.userId;
-  const user = tempUser.find((user) => user.userId === userId);
-  const avatar = req.body.userAvatar;
-  user.userAvatar = avatar;
-  res.send(tempUser);
-});
+  app.get("/api/articles", async (req, res) => {
+    const contents = await db.collection("contents").find({}).toArray();
+    res.send(contents);
+  });
 
-app.put("/api/users/:userId/password", (req, res) => {
-  const userId = req.params.userId;
-  const user = tempUser.find((user) => user.userId === userId);
-  const password = req.body.password;
-  user.password = password;
-  res.send(tempUser);
-});
+  app.post("/api/articles/new", async (req, res) => {
+    const body = req.body;
+    await db.collection("contents").insertOne(body);
+    const contents = await db.collection("contents").find({}).toArray();
+    res.send(contents);
+  });
 
-app.post("/api/users/new", (req, res) => {
-  const body = req.body;
-  tempUser.push(body);
-  res.send(tempUser);
-});
+  app.put("/api/articles/:articleId/like", async (req, res) => {
+    const articleId = req.params.articleId;
+    await db.collection("contents").updateOne(
+      { id: articleId },
+      {
+        $inc: { like: 1 },
+      }
+    );
+    const contents = await db.collection("contents").find({}).toArray();
+    res.send(contents);
+  });
 
-app.get("/api/bio", (req, res) => {
-  res.send(tempBio);
-});
+  app.put("/api/articles/:articleId/unlike", async (req, res) => {
+    const articleId = req.params.articleId;
+    await db.collection("contents").updateOne(
+      { id: articleId },
+      {
+        $inc: { like: -1 },
+      }
+    );
+    const contents = await db.collection("contents").find({}).toArray();
+    res.send(contents);
+  });
 
-app.put("/api/bio/bioSum", (req, res) => {
-  const body = req.body.bioSum;
-  tempBio.bioSum = body;
-  res.send(tempBio);
-});
+  app.get("/api/users", async (req, res) => {
+    const users = await db.collection("users").find({}).toArray();
+    res.send(users);
+  });
 
-app.put("/api/bio/bioText/:id", (req, res) => {
-  const id = req.params.id;
-  const body = req.body.bioText;
-  tempBio.bioText[id].text = body;
-  res.send(tempBio);
-});
+  // app.put("/api/users/:userId/avatar", (req, res) => {
+  //   const userId = req.params.userId;
+  //   const user = tempUser.find((user) => user.userId === userId);
+  //   const avatar = req.body.userAvatar;
+  //   user.userAvatar = avatar;
+  //   res.send(tempUser);
+  // });
 
-app.post("/api/articles/:articleId/comment", (req, res) => {
-  const articleId = req.params.articleId;
-  const article = tempContent.find((article) => article.id === articleId);
-  const body = req.body;
-  article.comments.unshift(body);
-  res.send(tempContent);
-});
+  app.put("/api/users/:userId/password", async (req, res) => {
+    const userId = req.params.userId;
+    const password = req.body.password;
+    await db.collection("users").updateOne(
+      { userId: userId },
+      {
+        $set: { password: password },
+      }
+    );
+    const users = await db.collection("users").find({}).toArray();
+    res.send(users);
+  });
 
-const port = 8000;
+  app.post("/api/users/new", async (req, res) => {
+    const body = req.body;
+    await db.collection("users").insertOne(body);
+    const users = await db.collection("users").find({}).toArray();
+    res.send(users);
+  });
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
+  app.get("/api/bio", async (req, res) => {
+    const bio = await db.collection("bio").find({}).toArray();
+    res.send(bio);
+  });
+
+  app.put("/api/bio/bioSum", async (req, res) => {
+    const body = req.body.bioSum;
+    await db.collection("bio").update({
+      $set: { bioSum: body },
+    });
+    const bio = await db.collection("bio").find({}).toArray();
+    res.send(bio);
+  });
+
+  // app.put("/api/bio/bioText/:id", (req, res) => {
+  //   const id = req.params.id;
+  //   const body = req.body.bioText;
+  //   tempBio.bioText[id].text = body;
+  //   res.send(tempBio);
+  // });
+
+  app.post("/api/articles/:articleId/comment", async (req, res) => {
+    const articleId = req.params.articleId;
+    const article = await db.collection("contents").findOne({ id: articleId });
+    const body = req.body;
+    await db.collection("contents").updateOne(
+      { id: articleId },
+      {
+        $push: { comments: { $each: [body], $position: 0 } },
+      }
+    );
+    const contents = await db.collection("contents").find({}).toArray();
+    res.send(contents);
+  });
+
+  const PORT = process.env.PORT || 8000;
+
+  app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+  });
+}
+
+start();

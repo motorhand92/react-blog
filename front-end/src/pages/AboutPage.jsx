@@ -7,7 +7,7 @@ function AboutPage() {
   useEffect(() => {
     async function getBio() {
       const response = await axios.get("/api/bio");
-      const bioInfo = response.data;
+      const bioInfo = response.data[0];
       updateBio(bioInfo);
     }
     getBio();
