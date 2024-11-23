@@ -24,9 +24,11 @@ Includes:
   9. Like the article by hitting the heart icon on the bottom of the article. Like quantity will be increased by one and heart icon will be red.
   10. Send comment by writing the comment inside the input section and hitting the send button. User's comment will be added into the old sent comments.
 - Account Page: User can change their account setting in that page and this page can be navigated from navigation bar. Users saved to the database have titles. These title are decleared as "admin", "moderator" and "user". With sign up function, there can be only a "user" added. With respect to the titles, "Change Password", "Update Bio" and "Add Article" sections will appear. If User is "admin" or "moderator", all sections will appear. If user is "user" only "Change Password" will appear.
-  For test, a user is created by me, you can just use it as and admin.
-  username:admin
-  password:password
+
+  - For test, a user is created by me, you can just use it as and admin.
+
+    - username:admin
+    - password:password
 
   - Change Password : This section works for the current user update his/her password.
   - Update Bio : This section works for updating summary bio on homepage.
