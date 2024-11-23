@@ -27,8 +27,8 @@ Includes:
 
   - For test, a user is created by me, you can just use it as and admin.
 
-    - username:admin
-    - password:password
+    - username: admin
+    - password: password
 
   - Change Password : This section works for the current user update his/her password.
   - Update Bio : This section works for updating summary bio on homepage.
