@@ -32,7 +32,7 @@ const UpdatePassword = () => {
 
     return (
       <div className="account-content">
-        <h3>Update Bio</h3>
+        <h3>Change Password</h3>
         <h4>Write your new password</h4>
         <input ref={updatePasswordText} type="password" className="account-title" />
         <button onClick={update} className="account-button">
