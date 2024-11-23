@@ -56,4 +56,4 @@ git clone or code download.zip
 
 # project start
 
-cd react-blog/back-end -> npm run dev -> localhost:8000
+cd react-blog/back-end -> npm run dev -> http://localhost:8000
